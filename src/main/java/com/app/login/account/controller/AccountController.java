@@ -31,7 +31,7 @@ import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 
 @RestController
-//@CrossOrigin
+@CrossOrigin
 @RequestMapping("/api")
 public class AccountController {
 	
@@ -42,7 +42,7 @@ public class AccountController {
 	private final Logger logger = LoggerFactory
 			.getLogger(com.app.login.account.controller.AccountController.class);
 	
-	@PostMapping("/v1/account") //Create Account
+	@PostMapping("/v/account") //Create Account
 	public ResponseEntity<ResponseOut> createAccount(@RequestHeader Map<String, String> headers,
 			@RequestBody(required = false) AccountIn body) {
 		StopWatch watch = new StopWatch();
