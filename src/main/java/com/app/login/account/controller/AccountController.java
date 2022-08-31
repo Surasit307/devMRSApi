@@ -42,7 +42,7 @@ public class AccountController {
 	private final Logger logger = LoggerFactory
 			.getLogger(com.app.login.account.controller.AccountController.class);
 	
-	@PostMapping("/v/account") //Create Account
+	@PostMapping("/v1/account") //Create Account
 	public ResponseEntity<ResponseOut> createAccount(@RequestHeader Map<String, String> headers,
 			@RequestBody(required = false) AccountIn body) {
 		StopWatch watch = new StopWatch();

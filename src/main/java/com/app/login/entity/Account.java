@@ -24,14 +24,15 @@ public class Account {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer accountId;
+	public String username;
+	public String password;
 	private String firstname;
 	private String lastname;
 	private String gender;
-	private String address;
-	public String username;
-	public String password;
 	private String email;
+	private String address;
 	private String email_validation;
+//	public String status;
 	private Timestamp date;
 	
 	public Integer getAccountId() {
@@ -39,6 +40,18 @@ public class Account {
 	}
 	public void setAccountId(Integer accountId) {
 		this.accountId = accountId;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getFirstname() {
 		return firstname;
@@ -58,29 +71,17 @@ public class Account {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getEmail_validation() {
 		return email_validation;
@@ -88,13 +89,19 @@ public class Account {
 	public void setEmail_validation(String email_validation) {
 		this.email_validation = email_validation;
 	}
-	
+//	public String getStatus() {
+//		return status;
+//	}
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
 	public Timestamp getDate() {
 		return date;
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	
 
 	
 	

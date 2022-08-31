@@ -24,6 +24,7 @@ public class Login {
 	public String username;
 	private String status_login;
 	private Timestamp token;
+	//public String status;
 	private Timestamp date;
 	
 	public Integer getLoginId() {
@@ -50,6 +51,12 @@ public class Login {
 	public void setToken(Timestamp token) {
 		this.token = token;
 	}
+//	public String getStatus() {
+//		return status;
+//	}
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
 	public Timestamp getDate() {
 		return date;
 	}

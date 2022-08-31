@@ -48,6 +48,7 @@ public class AccountServiceImpl implements AccountService {
         account.setPassword(accountIn.getPassword());
         account.setEmail(accountIn.getEmail());
         account.setEmail_validation(null);
+        //account.setStatus("user");
         account.setDate(new Timestamp(System.currentTimeMillis()));
         
         accountRepository.save(account);
@@ -105,6 +106,7 @@ public class AccountServiceImpl implements AccountService {
         login.setUsername(loginIn.username);
         login.setStatus_login("online");
         login.setToken(null);
+        //login.setStatus(account.status);
         login.setDate(new Timestamp(System.currentTimeMillis()));
         loginRepository.save(login);
         String json = new Gson().toJson(login);
@@ -115,6 +117,7 @@ public class AccountServiceImpl implements AccountService {
     			login = new Login();
                 login.setUsername(loginIn.username);
                 login.setStatus_login("online");
+                //login.setStatus(account.status);
                 login.setToken(null);
                 login.setDate(new Timestamp(System.currentTimeMillis()));
                 loginRepository.save(login);
@@ -137,6 +140,7 @@ public class AccountServiceImpl implements AccountService {
         login.setLoginId(login.getLoginId());
         login.setStatus_login("offline");
         login.setToken(null);
+        //login.setStatus(login.status);
         login.setDate(new Timestamp(System.currentTimeMillis()));
         loginRepository.save(login);
         String json = new Gson().toJson(login);
