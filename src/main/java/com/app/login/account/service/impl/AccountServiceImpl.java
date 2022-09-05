@@ -1,6 +1,7 @@
 package com.app.login.account.service.impl;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -63,6 +64,12 @@ public class AccountServiceImpl implements AccountService {
     	String json = new Gson().toJson(account);
     	Map<String,Object> result = new ObjectMapper().readValue(json, HashMap.class);
     	return result;
+    }
+    
+    @Override //Read All Data
+    public List<Account> getAllAccount() {
+    	List<Account> account = accountRepository.findAll();
+        return account;
     }
     
     @Override //Update Account
@@ -178,6 +185,8 @@ public class AccountServiceImpl implements AccountService {
         Map<String,Object> result = new ObjectMapper().readValue(json, HashMap.class);
         return result;
    }
+	
+
 	
 }
 

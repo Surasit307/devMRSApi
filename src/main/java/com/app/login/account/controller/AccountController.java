@@ -1,5 +1,6 @@
 package com.app.login.account.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
@@ -27,11 +28,12 @@ import com.app.login.account.service.AccountService;
 import com.app.login.common.dto.ApiStatusOut;
 import com.app.login.common.dto.ResponseOut;
 import com.app.login.common.utils.StopWatch;
+import com.app.login.entity.Account;
 import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api")
 public class AccountController {
 	
@@ -152,8 +154,8 @@ public class AccountController {
       }
       
   }
-      @PutMapping("/v1/account") //Update message
-  	 public ResponseEntity<ResponseOut> updateAccount(@RequestHeader Map<String, String> headers,
+     @PutMapping("/v1/updateaccount") //Update message
+  	  public ResponseEntity<ResponseOut> updateAccount(@RequestHeader Map<String, String> headers,
   			@RequestBody(required = false) AccountIn body) {
   		StopWatch watch = new StopWatch();
   		ObjectMapper mapper = new ObjectMapper();
@@ -186,7 +188,7 @@ public class AccountController {
   		}
   	}
 
-  	@DeleteMapping("/v1/account/{account_id}") //Delete message
+  	@DeleteMapping("/v1/deleteaccount/{account_id}") //Delete message
   	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
   			@PathVariable int account_id) {
   		StopWatch watch = new StopWatch();
@@ -400,7 +402,11 @@ public class AccountController {
 	      }
 	  }
 	  
+	  @GetMapping("v1/account")
 	  
+	  public List<Account> getAllAccount(){
+		  return accountService.getAllAccount();
+	  }
 }
   
 
