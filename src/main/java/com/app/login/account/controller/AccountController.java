@@ -29,6 +29,7 @@ import com.app.login.common.dto.ApiStatusOut;
 import com.app.login.common.dto.ResponseOut;
 import com.app.login.common.utils.StopWatch;
 import com.app.login.entity.Account;
+import com.app.login.entity.Login;
 import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 
@@ -213,7 +214,35 @@ public class AccountController {
   			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
   		}
   	}
-      
+  	
+  	@DeleteMapping("/v1/DeleteAllAccount") //Delete message
+  	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
+  			Account account) {
+  		StopWatch watch = new StopWatch();
+  		ObjectMapper mapper = new ObjectMapper();
+  		logger.info(String.format("Delete All Account Controller Request Header: %s", headers.keySet().stream()
+  				.map(key -> key + ":" + headers.get(key)).collect(Collectors.joining(", ", "{", "}"))));
+  		ApiStatusOut apistatus = new ApiStatusOut();
+  		ResponseOut response = new ResponseOut();
+  		
+  		try {
+  			accountService.DeleteAllAccount(account);
+  			apistatus.setCode("S0000");
+  			apistatus.setBusinessMessage("Delete All Data Successful");
+  			apistatus.setDeveloperMessage("Success");
+  			response.setApiStatus(apistatus);
+//     	    response.setData((Map<String, Object>) accountService.DeleteAllAccount(account));
+  			logger.info(String.format("DeleteAccount Controller Response: %s", mapper.writeValueAsString(response)));
+  			logger.info(String.format("DeleteAccount Controller elapse time %.4f seconds", watch.elapsedTime()));
+  			return ResponseEntity.status(HttpStatus.OK).body(response);
+  		} catch (Exception e) {
+  			apistatus.setCode("E5000");
+  			apistatus.setBusinessMessage("Service Not Available");
+  			apistatus.setDeveloperMessage(e.getMessage());
+  			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+  		}
+  	}
+  	
   	
 	  @PostMapping("/v1/login")
 	  public ResponseEntity<ResponseOut> AccessLogin(@RequestHeader Map<String, String> headers, 
@@ -403,10 +432,10 @@ public class AccountController {
 	  }
 	  
 	  @GetMapping("v1/account")
-	  
 	  public List<Account> getAllAccount(){
 		  return accountService.getAllAccount();
 	  }
+	  
 }
   
 

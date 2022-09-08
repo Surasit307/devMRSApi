@@ -72,6 +72,8 @@ public class AccountServiceImpl implements AccountService {
         return account;
     }
     
+    
+    
     @Override //Update Account
     public Map<String,Object> update(AccountIn accountIn) throws Exception {
     	Account account = accountRepository.findAccountByAccountId(accountIn.getAccountId());
@@ -101,6 +103,13 @@ public class AccountServiceImpl implements AccountService {
         Map<String,Object> result = new ObjectMapper().readValue(json, HashMap.class);
         return result;
     }
+    
+    
+    @Override //Delete All Account
+    public void DeleteAllAccount(Account account) throws Exception {
+        accountRepository.deleteAll(account);
+    }
+
 
     @Override //Login
     public Map<String,Object> userlogin(LoginIn loginIn) throws Exception {

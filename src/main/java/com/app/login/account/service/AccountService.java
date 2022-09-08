@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.app.login.account.dto.AccountIn;
 import com.app.login.account.dto.NewpasswordIn;
 import com.app.login.entity.Account;
+import com.app.login.entity.Login;
 import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 
@@ -30,6 +31,11 @@ public interface AccountService {
 	Map<String, Object> changepass(NewpasswordIn newpasswordIn) throws Exception;
 
 	List<Account> getAllAccount();
+
+	void DeleteAllAccount(Account account) throws Exception;
+
+
+	
 
 
 

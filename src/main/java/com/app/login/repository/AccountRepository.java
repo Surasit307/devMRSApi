@@ -1,5 +1,7 @@
 package com.app.login.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +19,12 @@ public interface AccountRepository extends JpaRepository<Account,Integer>{
 	
 	//function findBy 
 	public Account findByUsername(String username);
-
+	
+	@Query(value="Delete From account",nativeQuery = true)
+	public Account deleteAll(Account account);
+	
+	@Query(value="Select * From account",nativeQuery = true)
+	public Account findAll(Account account);
 
 
 }
