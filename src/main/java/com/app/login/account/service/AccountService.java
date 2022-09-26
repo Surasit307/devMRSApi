@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+
+import com.app.entity.Account;
+import com.app.entity.Login;
 import com.app.login.account.dto.AccountIn;
 import com.app.login.account.dto.NewpasswordIn;
-import com.app.login.entity.Account;
-import com.app.login.entity.Login;
+import com.app.login.auction.entity.ListAuction;
 import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 
@@ -33,6 +35,10 @@ public interface AccountService {
 	List<Account> getAllAccount();
 
 	void DeleteAllAccount(Account account) throws Exception;
+
+	List<ListAuction> getAllListAuction();
+
+
 
 
 	

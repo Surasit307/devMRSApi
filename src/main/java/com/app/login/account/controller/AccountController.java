@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.app.entity.Account;
+import com.app.entity.Login;
 import com.app.login.account.dto.AccountIn;
 import com.app.login.account.dto.NewpasswordIn;
 import com.app.login.account.service.AccountService;
 import com.app.login.common.dto.ApiStatusOut;
 import com.app.login.common.dto.ResponseOut;
 import com.app.login.common.utils.StopWatch;
-import com.app.login.entity.Account;
-import com.app.login.entity.Login;
 import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 
@@ -45,7 +45,7 @@ public class AccountController {
 	private final Logger logger = LoggerFactory
 			.getLogger(com.app.login.account.controller.AccountController.class);
 	
-	@PostMapping("/v1/account") //Create Account
+	@PostMapping("/v1/createAccount") //Create Account
 	public ResponseEntity<ResponseOut> createAccount(@RequestHeader Map<String, String> headers,
 			@RequestBody(required = false) AccountIn body) {
 		StopWatch watch = new StopWatch();
@@ -121,7 +121,7 @@ public class AccountController {
 		}
 	}
 	
-  @GetMapping("/v1/account/{account_id}") //Select
+  @GetMapping("/v1/selectAccount/{account_id}") //Select
   public ResponseEntity<ResponseOut> readAccount(@RequestHeader Map<String, String> headers, @PathVariable int account_id) {
       StopWatch watch = new StopWatch();
       ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +155,14 @@ public class AccountController {
       }
       
   }
-     @PutMapping("/v1/updateaccount") //Update message
+  
+  @GetMapping("v1/selectAllAccount")
+  public List<Account> getAllAccount(){
+	  return accountService.getAllAccount();
+  }
+  
+  
+     @PutMapping("/v1/updateAccount") //Update message
   	  public ResponseEntity<ResponseOut> updateAccount(@RequestHeader Map<String, String> headers,
   			@RequestBody(required = false) AccountIn body) {
   		StopWatch watch = new StopWatch();
@@ -189,7 +196,7 @@ public class AccountController {
   		}
   	}
 
-  	@DeleteMapping("/v1/deleteaccount/{account_id}") //Delete message
+  	@DeleteMapping("/v1/deleteAccount/{account_id}") //Delete message
   	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
   			@PathVariable int account_id) {
   		StopWatch watch = new StopWatch();
@@ -215,7 +222,7 @@ public class AccountController {
   		}
   	}
   	
-  	@DeleteMapping("/v1/DeleteAllAccount") //Delete message
+  	@DeleteMapping("/v1/deleteAllAccount") //Delete message
   	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
   			Account account) {
   		StopWatch watch = new StopWatch();
@@ -431,10 +438,6 @@ public class AccountController {
 	      }
 	  }
 	  
-	  @GetMapping("v1/account")
-	  public List<Account> getAllAccount(){
-		  return accountService.getAllAccount();
-	  }
 	  
 }
   

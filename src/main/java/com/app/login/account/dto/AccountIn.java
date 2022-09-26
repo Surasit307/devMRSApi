@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AccountIn implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//@JsonProperty("account_id")
 	private int accountId;
 	@JsonProperty("username")
 	public String username;

@@ -11,13 +11,15 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.app.entity.Account;
+import com.app.entity.Change_Password;
+import com.app.entity.Login;
 import com.app.login.account.dto.AccountIn;
 import com.app.login.account.dto.NewpasswordIn;
 import com.app.login.account.service.AccountService;
+import com.app.login.auction.entity.ListAuction;
+import com.app.login.auction.repository.ListAuctionRepository;
 import com.app.login.common.dto.ResponseOut;
-import com.app.login.entity.Account;
-import com.app.login.entity.Change_Password;
-import com.app.login.entity.Login;
 import com.app.login.login.dto.LoginIn;
 import com.app.login.login.dto.LogoutIn;
 import com.app.login.repository.AccountRepository;
@@ -34,6 +36,9 @@ public class AccountServiceImpl implements AccountService {
     
     @Autowired
     private ChangePassRepository changepassRepository;
+    
+	@Autowired
+	ListAuctionRepository listAuctionRepository;
     
 	private final Logger logger = LoggerFactory
 			.getLogger(com.app.login.account.controller.AccountController.class);
@@ -66,13 +71,17 @@ public class AccountServiceImpl implements AccountService {
     	return result;
     }
     
-    @Override //Read All Data
+    @Override //Read All Data Account
     public List<Account> getAllAccount() {
     	List<Account> account = accountRepository.findAll();
         return account;
     }
     
-    
+    @Override //Read All Data ListAuction
+    public List<ListAuction> getAllListAuction() {
+    	List<ListAuction> listauction = listAuctionRepository.findAll();
+        return listauction;
+    }
     
     @Override //Update Account
     public Map<String,Object> update(AccountIn accountIn) throws Exception {

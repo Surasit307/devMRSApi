@@ -1,6 +1,7 @@
 package com.app.login.auction.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,14 +11,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "list_auction")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ListAuction {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
+	@Column(name = "id_product")
+	private String idProduct;
+	
 	@Column(name = "product_name")
 	private String productName;
 
@@ -28,22 +39,19 @@ public class ListAuction {
 	private Double price;
 
 	@Column(name = "time")
-	private Date time;
+	private LocalTime time;
 
 	@Column(name = "date")
-	private Timestamp date;
+	private Date date;
 
 	@Column(name = "price_winner")
-	private Timestamp priceWinner;
+	private Double priceWinner;
 
 	@Column(name = "view")
 	private int view;
 
 	@Column(name = "user_bid")
 	private String userBid;
-
-	@Column(name = "id_product")
-	private String idProduct;
 
 	@Column(name = "image_1")
 	private byte[] image1;
@@ -74,6 +82,14 @@ public class ListAuction {
 		this.id = id;
 	}
 
+	public String getIdProduct() {
+		return idProduct;
+	}
+
+	public void setIdProduct(String idProduct) {
+		this.idProduct = idProduct;
+	}
+	
 	public String getProductName() {
 		return productName;
 	}
@@ -98,27 +114,27 @@ public class ListAuction {
 		this.price = price;
 	}
 
-	public Date getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setTime(LocalTime localTime) {
+		this.time = localTime;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public Timestamp getPriceWinner() {
+	public Double getPriceWinner() {
 		return priceWinner;
 	}
 
-	public void setPriceWinner(Timestamp priceWinner) {
+	public void setPriceWinner(Double priceWinner) {
 		this.priceWinner = priceWinner;
 	}
 
@@ -136,14 +152,6 @@ public class ListAuction {
 
 	public void setUserBid(String userBid) {
 		this.userBid = userBid;
-	}
-
-	public String getIdProduct() {
-		return idProduct;
-	}
-
-	public void setIdProduct(String idProduct) {
-		this.idProduct = idProduct;
 	}
 
 	public byte[] getImage1() {

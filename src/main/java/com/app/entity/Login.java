@@ -1,4 +1,4 @@
-package com.app.login.entity;
+package com.app.entity;
 
 import java.sql.Timestamp;
 
