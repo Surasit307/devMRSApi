@@ -51,6 +51,32 @@ public class AuctionController {
 		  return auctionService.getVideoNotNull();
 	  }
 	  
+	  	@DeleteMapping("/v1/deleteAuction/{id}") //Delete message
+	  	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
+	  			@PathVariable int id) {
+	  		StopWatch watch = new StopWatch();
+	  		ObjectMapper mapper = new ObjectMapper();
+	  		logger.info(String.format("Delete Auction Controller Request Header: %s", headers.keySet().stream()
+	  				.map(key -> key + ":" + headers.get(key)).collect(Collectors.joining(", ", "{", "}"))));
+	  		ApiStatusOut apistatus = new ApiStatusOut();
+	  		ResponseOut response = new ResponseOut();
+	  		try {
+	  			apistatus.setCode("S0000");
+	  			apistatus.setBusinessMessage("Delete Data Successful");
+	  			apistatus.setDeveloperMessage("Success");
+	  			response.setApiStatus(apistatus);
+	  			auctionService.delete(id);
+	  			logger.info(String.format("Delete Auction Controller Response: %s", mapper.writeValueAsString(response)));
+	  			logger.info(String.format("Delete Auction Controller elapse time %.4f seconds", watch.elapsedTime()));
+	  			return ResponseEntity.status(HttpStatus.OK).body(response);
+	  		} catch (Exception e) {
+	  			apistatus.setCode("E5000");
+	  			apistatus.setBusinessMessage("Service Not Available");
+	  			apistatus.setDeveloperMessage(e.getMessage());
+	  			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	  		}
+	  	}
+	  
 	  	
 	  	@DeleteMapping("/v1/deleteAllAuction") //Delete message
 	  	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
@@ -68,8 +94,8 @@ public class AuctionController {
 	  			apistatus.setBusinessMessage("Delete All Data Successful");
 	  			apistatus.setDeveloperMessage("Success");
 	  			response.setApiStatus(apistatus);
-	  			logger.info(String.format("DeleteAccount Controller Response: %s", mapper.writeValueAsString(response)));
-	  			logger.info(String.format("DeleteAccount Controller elapse time %.4f seconds", watch.elapsedTime()));
+	  			logger.info(String.format("Delete Auction Controller Response: %s", mapper.writeValueAsString(response)));
+	  			logger.info(String.format("Delete Auction Controller elapse time %.4f seconds", watch.elapsedTime()));
 	  			return ResponseEntity.status(HttpStatus.OK).body(response);
 	  		} catch (Exception e) {
 	  			apistatus.setCode("E5000");

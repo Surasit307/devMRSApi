@@ -17,10 +17,11 @@ public interface ListAuctionRepository extends JpaRepository<ListAuction, Intege
 	@Query(value="select * from list_auction where video_1 IS NOT NULL || video_2 IS NOT NULL",nativeQuery=true)
 	List<ListAuction> getVideoNotNull();
 	
-	@Query(value="Delete From auction",nativeQuery = true)
+	@Query(value="Delete From list_auction",nativeQuery = true)
 	public ListAuction deleteAll(ListAuction listauction);
 
-//	void deleteById(String auctionId);
-	
+	@Query(value="Delete From list_auction where id=?",nativeQuery = true)
+	ListAuction delete(int id);
+
 
 }

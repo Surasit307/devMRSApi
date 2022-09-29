@@ -49,6 +49,11 @@ public class AuctionService {
         listAuctionRepository.deleteAll(listAuction);
     }
     
+	public void delete(int id) throws Exception {
+		listAuctionRepository.delete(id);
+		
+	}
+    
 //	public ListAuction saveImages(MultipartFile[] files, String auctionId) throws IOException, NoSuchMethodException,
 //			SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 //		Optional<ListAuction> optionalListAuctionEntity = listAuctionRepository.findById(Integer.valueOf(auctionId));
