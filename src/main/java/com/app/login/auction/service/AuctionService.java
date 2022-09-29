@@ -8,13 +8,17 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.app.entity.Account;
 import com.app.login.auction.dto.UpdateAuctionImagesBase64Payload;
 import com.app.login.auction.entity.ListAuction;
 import com.app.login.auction.repository.ListAuctionRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import org.apache.commons.lang3.time.DateParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +42,11 @@ public class AuctionService {
     public List<ListAuction> getVideoNotNull() {
     	List<ListAuction> listauction = listAuctionRepository.getVideoNotNull();
         return listauction;
+    }
+    
+    
+    public void deleteAllAuction(ListAuction listAuction) throws Exception {
+        listAuctionRepository.deleteAll(listAuction);
     }
     
 //	public ListAuction saveImages(MultipartFile[] files, String auctionId) throws IOException, NoSuchMethodException,

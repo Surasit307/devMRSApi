@@ -7,8 +7,12 @@ import com.app.login.auction.service.AuctionService;
 import com.app.login.common.dto.ApiStatusOut;
 import com.app.login.common.dto.ResponseOut;
 import com.app.login.common.utils.ObjectMapperUtils;
+import com.app.login.common.utils.StopWatch;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +50,35 @@ public class AuctionController {
 	  public List<ListAuction> getVideoNotNull(){
 		  return auctionService.getVideoNotNull();
 	  }
+	  
+	  	
+	  	@DeleteMapping("/v1/deleteAllAuction") //Delete message
+	  	public ResponseEntity<ResponseOut> deleteAccount(@RequestHeader Map<String, String> headers,
+	  			ListAuction listauction) {
+	  		StopWatch watch = new StopWatch();
+	  		ObjectMapper mapper = new ObjectMapper();
+	  		logger.info(String.format("Delete All Auction Controller Request Header: %s", headers.keySet().stream()
+	  				.map(key -> key + ":" + headers.get(key)).collect(Collectors.joining(", ", "{", "}"))));
+	  		ApiStatusOut apistatus = new ApiStatusOut();
+	  		ResponseOut response = new ResponseOut();
+	  		
+	  		try {
+	  			auctionService.deleteAllAuction(listauction);
+	  			apistatus.setCode("S0000");
+	  			apistatus.setBusinessMessage("Delete All Data Successful");
+	  			apistatus.setDeveloperMessage("Success");
+	  			response.setApiStatus(apistatus);
+	  			logger.info(String.format("DeleteAccount Controller Response: %s", mapper.writeValueAsString(response)));
+	  			logger.info(String.format("DeleteAccount Controller elapse time %.4f seconds", watch.elapsedTime()));
+	  			return ResponseEntity.status(HttpStatus.OK).body(response);
+	  		} catch (Exception e) {
+	  			apistatus.setCode("E5000");
+	  			apistatus.setBusinessMessage("Service Not Available");
+	  			apistatus.setDeveloperMessage(e.getMessage());
+	  			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	  		}
+	  	}
+	  	
 	  
 //	  @PostMapping(path = "/v1/updateAuctionImages")
 //		public ResponseEntity<ResponseOut> updateAuctionImages(@RequestParam("fileImage") MultipartFile[] files,
